@@ -17,3 +17,47 @@
 #### POST 전송 - 저장
 #### GET 전송 - 저장 (GET 메서드는 조회에만 사용!!! 저장에 사용하면 안됨)
 ## HTTP API 설계 예시
+
+
+TIL(2021/08/20 ~ 2021/08/23)
+엘리스 코딩 3기 AI트랙 레이서 합격!!!
+가족 휴가 20 ~ 21
+
+
+TIL (2021/08/24)
+
+HTTP API 설계 예시
+
+    HTTP API - 컬렉션
+        POST 기반 등록
+        서버가 리소스 URI 결정
+    
+    HTTP API - 스토어
+        PUT 기반 등록
+        클라이언트가 리소스 URI 결정
+    
+    HTML FORM 사용
+        순수 HTML + HTML form 사용
+        GET, POST 지원
+        컨트롤 URI 사용 (GET, POST로만 하기 제약이 있을 경우 / 예시 -> 삭제, 수정(폼사용x) 등등)
+
+    참고하면 좋은 URI 설계 개념
+        
+        문서(document)
+            단일 개념 (파일하나, 객체 인스턴스, 데이터베이서 row)
+            예시 -> /members/100, /files/star.jpg
+
+        컬렉션(collection)
+            서버가 관리하는 리소스 디렉터리
+            서버가 리소스의 URI 를 생성하고 관리
+            예시 -> /members
+
+        스토어(store)
+            클라이언트가 관리하는 자원 저장소
+            클라이언트가 리소스의 URI 를 알고 관리
+            예시 -> /files
+
+        컨트롤러(controller), 컨트롤 URI
+            문서, 컬렉션, 스토어로 해결하기 어려운 추가 프로세스 실행
+            동사를 직접 사용
+            예시 -> /members/{id}/delete
