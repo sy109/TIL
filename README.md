@@ -205,8 +205,20 @@ HTTP 헤더
     구체적인 것이 우선한다.
     Accept: text/*, text/plain, text/plain:format=flowed, */*
                3          2               1                4
-                              
+
 협상과 우선순위 3
 
     구체적인 것을 기준으로 미디어 타입을 맞춘다
     Accept: text/*;q=0.3, text/html;q=0.7, text/html;level=1, text/html;level=2;q=0.4, */*;q=0.5
+
+전송방식
+
+    단순전송 -> 컨텐츠 길이를 알 수 있을때 사용(Content-Length)
+
+    압축전송 -> 컨텐츠 인코딩(Content-Encoding)을 알고 있을때 압축하여 전송
+    
+    분할전송 -> 컨텐츠를 분할하여 전송할때 (Tranfer-Encoding: chunked), 용량이 큰 컨텐츠를 분할하여 전송할때 사용
+            *** 컨텐츠 길이를 사용하면 안됨
+
+    범위전송 -> 범위를 지정하여 전송할때 사용 (Content-Range)
+              (클라이언트가 서버에 컨텐츠를 요구할때, 자신이 이미 받은 컨텐츠가 있고 그 외 더 추가적인 컨텐츠를 요청할때 사용)
