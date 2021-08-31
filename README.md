@@ -141,4 +141,72 @@ HTTP 상태 코드
         서비스 이용 불가
         서버가 일시적인 과부하 또는 예정된 작업으로 잠시 요청을 처리할 수 없음
         Retry-After 헤더 필드로 얼마뒤에 복귀되는지 보낼수도 있음
-        
+
+HTTP 헤더
+
+    HTTP 전송에 필요한 모든 부가정보
+        예) 메시지 바디의 내용, 메시지 바디의 크기, 압축, 인증 등등
+    
+    헤더 분류 (과거!!!)
+        - General 헤더 : 메시지 전체에 적용되는 정보
+        - Request 헤더 : 요청 정보
+        - Response 헤더 : 응답 정보
+        - Entity 헤더 : 엔티티 바디 정보 / 엔티티 본문의 데이터를 해석할 수 있는 정보 제공 (데이터 유형, 데이터 길이, 압축 정보 등등)
+    
+    RFC723X 변화
+        엔티티 -> 표현 (Representation)
+        표현 = 표현 메타데이터 + 표현 데이터
+        메시지 본문 = 페이로드
+        표현 헤더는 표현 데이터를 해석할 수 있는 정보 제공
+        Content-Type -> 표현 데이터의 형식
+        Content-Encoding -> 표현 데이터의 압축 방식
+        Content-Language -> 표현 데이터의 자연 언어
+        Content-Length -> 표현 데이터의 길이
+
+
+표현(Representation)
+
+    Content-Type ->표현 데이터의 형식
+        미디어 타입, 문자 인코딩
+
+    Content-Encoding -> 표현 데이터의 압축 방식
+        표현 데이터를 압축하기 위해 사용
+        데이터를 전달하는 곳에서 압축 후 인코딩 헤더 추가
+        데이터를 읽는 쪽에서 인코딩 헤더의 정보로 압축 해제
+
+    Content-Language -> 표현 데이터의 자연 언어
+        영어, 한국어, 등등
+
+    Content-Length -> 표현 데이터의 길이
+        바이트 단위
+        Transfer-Encoding(전송코딩)을 사용하면 Content-Length를 사용하면 안됨
+
+협상(콘텐츠 네고시에이션)
+
+    Accept -> 클라이언트가 선호하는 미디어 타입 전달
+
+    Accept-Charset -> 클라이언트가 선호하는 문자 인코딩
+
+    Accept-Encoding -> 클라이언트가 선호하는 압축 인코딩
+
+    Accept-Language -> 클라이언트가 선호하는 자연 언어
+
+    협상 헤더는 요청시에만 사용
+
+협상과 우선순위 1
+
+    Quality Values(q) 값 사용
+    0 ~ 1 , 클수록 높은 우선순위 (생략하면 1)
+    Accept-Language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
+                       1        2         3        4
+
+협상과 우선순위 2
+
+    구체적인 것이 우선한다.
+    Accept: text/*, text/plain, text/plain:format=flowed, */*
+               3          2               1                4
+                              
+협상과 우선순위 3
+
+    구체적인 것을 기준으로 미디어 타입을 맞춘다
+    Accept: text/*;q=0.3, text/html;q=0.7, text/html;level=1, text/html;level=2;q=0.4, */*;q=0.5
