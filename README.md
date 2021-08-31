@@ -366,3 +366,29 @@ Stateless
         진짜 단순하게 ETag만 보내서 같으면 유지, 다르면 다시 받기!
         캐시 제어 로직을 서버에서 완전히 관리
         클라이언트는 단순이 이 값을 서버에 제공 (클라이언트는 캐시 메커니즘을 모름)
+
+캐시 제어 헤더
+
+    Cache-Control (캐시 제어)
+
+        Cache-Control: max-age
+            캐시 유효 시간, 초단위
+        Cache-Control: no-cache
+            데이터는 캐시해도 되지만, 항상 원(origin) 서버에 검증하고 사용
+        Cache-Control: no-store
+            데이터에 민감한 정보가 있으므로 저장하면 안됨
+            (메모리에서 사용하고 최대한 빨리 삭제)
+    
+    Pragma(하위호환)
+
+        Cache-Control: no-cache
+        HTTP 1.0 하위호환
+
+    Expires(캐시 만료일 지정 / 하휘호환) 
+
+        캐시 만료일을 정확한 날짜로 지정
+        HTTP 1.0 부터 사용
+        지금은 더 유연한 Cache-Control: max-age 권장
+        Cache-Control: max-age 와 함까 사용하면 Expires 는 무시
+
+    
