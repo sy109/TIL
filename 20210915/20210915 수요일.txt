@@ -1,0 +1,130 @@
+# 20210915 수요일
+
+# 마진 병합 현상
+
+## 형제간의 마진 병합 현상
+
+- 형제간의 마진 병합 현상은 더큰 마진을 가진 것으로 적용된다.
+
+```jsx
+#box1 {
+width: 100%;
+height: 200px;
+background-color: yellow;
+margin-bottom: 150px;
+}
+```
+
+```jsx
+#box2 {
+  width: 100%;
+  height: 200px;
+  background-color: pink;
+  margin-top: 100px;
+}
+```
+
+```jsx
+<div id="box1"></div>
+<div id="box2"></div>
+```
+
+- 위처럼 실행  하였을때 아래의 그림에서 노란색(Box1)과 분홍색(Box2)의 마진병합으로 인해 실제 가운데 마진은 150px로 더 큰 값이 적용된다.
+
+## 실행결과(중심의 공백의 크기가 150px 으로 적용되어있음)
+
+![스크린샷 2021-09-15 오전 10.44.59.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d544ca41-99fc-445b-82d9-28bfe64131ea/스크린샷_2021-09-15_오전_10.44.59.png)
+
+## 부모 자식간의 마진 병합 현상
+
+```jsx
+main {
+      width: 100%;
+      height: 400px;
+      background-color: yellow;
+    }
+    
+article {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  margin-top: 100px;
+}
+```
+
+```jsx
+<main role="main">  
+  <article></article>
+</main>
+```
+
+- 부모자식 태그간에는 자식 에게만 마진을 적용해도 부모까지 마진이 같이 적용된다.
+
+## 실행결과(위에 하얀 공백이 100px 만큼 있음)
+
+![스크린샷 2021-09-15 오전 10.50.15.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f926487a-f9f8-49fa-8beb-f4437300811e/스크린샷_2021-09-15_오전_10.50.15.png)
+
+## **이를 해결하기위해선 position 이라는 속성을 사용하면 되는데 추후 학습 예정**
+
+예시) position: absolute;
+
+# 레이아웃에 영향을 미치는 속성
+
+## display
+
+```jsx
+p { display: inline;}
+a { display: block;}
+a { display: inline-block;}
+```
+
+- 첫번째, 본래의 p 태그는 block 요소 이지만 inline 요소 처럼 다룰수 있게됨 (X축 정렬할 수 있게됨)
+- 두번째, 본래의 a 태그는 inline 요소 이지만 block 요소 처럼 다룰수 있게됨 (Y축 정렬할 수 있게됨)
+- 세번째, inline 과 block 요소의 성질을 모두 같게 되어 X축 정렬 이면서, 블록의 성질을 가지고 상하 배치 작업 까지 가능하게 함
+- inline-block은 내비게이션 버튼을 만들 때 주로 사용됨
+- inline 으로 바뀐 요소들에 대해서는 상하 배치작업이 안되고 block 요소로 바뀐 요소들에 대해서는 좌우 배치 작업이 불가능해진다.
+
+## float (해당 컨탠츠를 띄우기도 한다!!!!)
+
+- 왼쪽 또는 오른쪽을 선택하여 자신이 정렬하고 싶은 방향을 지정함
+
+```jsx
+<div class="foo">Hello World</div>
+<div class="bar">Hello World</div>
+
+/*style.css 문서*/
+.foo { float: left;}
+.bar { float: left;}
+```
+
+- 레이어가 겹쳐지지 않는 상태로 왼쪽에서부터 정렬시키고 싶은경우 float: left; 를 연속적으로 입력(float 을 같은 방향으로 사용한 컨탠츠 끼리는 겹쳐지지 않고 X축으로 정렬된다 / 물론 부모 태그의 width 사이즈 안에 한해서 가능)
+
+## clear
+
+- float 에 대한 속성을 제어 하고자 할때 사용함
+
+```jsx
+<header></header>
+<aside class="left">Hello World</aside>
+<main></main>
+<aside class="right">Hello World</aside>
+<footer></footer>
+
+/*style.css 문서*/
+footer { clear: both; }
+```
+
+## 브라우저와 공간 사이의 공백 제거하기
+
+- <html>과 <body> 태그는 margin 과 padding 값을 가지므로 초기화를 해 주어야 함
+
+```jsx
+<style>
+	html, body {
+			margin: 0;
+			padding: 0;
+	}
+</style>
+```
+
+- 혹은 * 로 모든 html 태그 선택 가능
