@@ -1,0 +1,22 @@
+<html>
+    <body>
+        <style>
+            h1{
+                background-color: navwajowhite;
+            }
+        </style>
+        <h1>Script 태그 방식</h1>
+        <script>
+            document.write(1+1);
+            document.write('<br>');
+            document.write(Math.random());
+        </script>
+        <h1>Event 방식</h1>
+        <input type="button" value="click me" style="background-color: red;" onclick="alert('hey');">
+        <input type="text" onchange="alert('changed')">
+        <div id="display">HELLO</div>
+        <input type="button" onclick="
+            document.querySelector('#display').style.backgroundColor='red';
+        " value="red">
+    </body>
+</html>
